@@ -83,6 +83,7 @@ async def login(body: LoginRequest, db: AsyncSession = Depends(get_db)) -> Token
         access_token=access_token,
         refresh_token=refresh_token,
         token_type="bearer",
+        user=UserResponse.model_validate(user),
     )
 
 
@@ -139,6 +140,7 @@ async def refresh_token(body: RefreshRequest, db: AsyncSession = Depends(get_db)
         access_token=new_access_token,
         refresh_token=new_refresh_token,
         token_type="bearer",
+        user=UserResponse.model_validate(user),
     )
 
 
