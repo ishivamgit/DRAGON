@@ -1,0 +1,16 @@
+# Local dev dependencies (no Docker / Postgres / Redis required).
+# Uses SQLite via aiosqlite and the in-memory cache fallback.
+# Relaxed pins so pip selects wheels compatible with your Python version.
+# For production, use requirements.txt instead (Postgres + Redis).
+
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+sqlalchemy[asyncio]>=2.0.36
+aiosqlite>=0.20.0
+pydantic[email]>=2.10.0
+pydantic-settings>=2.6.0
+bcrypt>=4.1.0
+python-jose[cryptography]>=3.3.0
+python-multipart>=0.0.20
+slowapi>=0.1.9
+python-slugify>=8.0.4

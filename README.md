@@ -13,35 +13,53 @@ A production-grade platform for hosting sponsored gaming competitions. Gamers si
 | Auth | JWT (access + refresh tokens) |
 | Dev | Docker Compose |
 
-## Quick Start (Docker)
+## Quick Start (local, no Docker)
+
+Local dev needs **no Docker, Postgres, or Redis** — it uses SQLite + an in-memory cache.
+
+**One-time setup:**
+```bash
+cd backend
+python -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements-local.txt
+.venv\Scripts\python.exe seed.py          # creates dragon.db + sample data
+cd ../frontend
+npm install
+```
+
+**Run** — double-click `start-local.bat`, or use two terminals:
+```bash
+# Backend
+cd backend
+.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 8010 --reload
+
+# Frontend
+cd frontend
+npm run dev
+```
+
+- Frontend: http://localhost:5174
+- Backend API / docs: http://127.0.0.1:8010/docs
+
+**Seed credentials:**
+- Admin: `admin@dragon.gg` / `Admin@123`
+- Player: `player@dragon.gg` / `Player@123`
+
+> Ports 8010/5174 are used because another local app occupies 8000/5173.
+
+## Production (Docker)
 
 ```bash
-cp .env.example .env
-docker-compose up --build
+cp .env.example .env       # set SECRET_KEY, Postgres DATABASE_URL, USE_REDIS=true
+docker compose up --build
 ```
 
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:8000
 - API Docs: http://localhost:8000/docs
 
-## Local Development
-
-**Backend:**
-```bash
-cd backend
-pip install -r requirements.txt
-cp ../.env.example .env
-uvicorn app.main:app --reload --port 8000
-```
-
-**Frontend:**
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Requires PostgreSQL and Redis running locally (or via Docker).
+Uses PostgreSQL + Redis (defined in `docker-compose.yml`). The backend selects
+SQLite vs Postgres from `DATABASE_URL` and Redis vs in-memory from `USE_REDIS`.
 
 ## Features
 

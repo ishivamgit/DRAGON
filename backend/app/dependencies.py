@@ -1,3 +1,4 @@
+import uuid
 from typing import AsyncGenerator
 
 from fastapi import Depends, HTTPException, Request, status
@@ -31,14 +32,16 @@ async def get_current_user(
         user_id: str = payload.get("sub")
         if not user_id:
             raise JWTError("Missing subject")
-    except JWTError:
+        # JWT subject is a string; the Uuid column needs a uuid.UUID instance.
+        user_uuid = uuid.UUID(user_id)
+    except (JWTError, ValueError):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired token",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    result = await db.execute(select(User).where(User.id == user_id))
+    result = await db.execute(select(User).where(User.id == user_uuid))
     user = result.scalar_one_or_none()
     if not user:
         raise HTTPException(

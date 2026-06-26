@@ -14,6 +14,11 @@ venv/
 env/
 .env
 
+# SQLite local dev database
+*.db
+*.db-journal
+backend/dragon.db
+
 # Alembic
 alembic/versions/*.py
 
