@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-dragon-dark text-white font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0F0F0F;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #7C3AED;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6D28D9;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-gradient-to-r from-dragon-purple to-dragon-amber bg-clip-text text-transparent;
+  }
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:border-dragon-purple/60 hover:shadow-lg hover:shadow-dragon-purple/10;
+  }
+  .btn-primary {
+    @apply bg-dragon-purple hover:bg-purple-700 text-white font-semibold px-6 py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-dragon-purple/30 active:scale-95;
+  }
+  .btn-secondary {
+    @apply border border-dragon-purple/50 text-dragon-purple hover:bg-dragon-purple/10 font-semibold px-6 py-2.5 rounded-lg transition-all duration-200 active:scale-95;
+  }
+  .btn-amber {
+    @apply bg-dragon-amber hover:bg-yellow-500 text-black font-semibold px-6 py-2.5 rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-dragon-amber/30 active:scale-95;
+  }
+  .input-dark {
+    @apply bg-black/40 border border-white/10 text-white placeholder-gray-500 rounded-lg px-4 py-2.5 focus:outline-none focus:border-dragon-purple/60 focus:ring-1 focus:ring-dragon-purple/40 transition-colors duration-200;
+  }
+  .surface-card {
+    @apply bg-dragon-navy border border-white/5 rounded-xl;
+  }
+}
