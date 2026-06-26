@@ -84,3 +84,19 @@ Key endpoints:
 - `GET /competitions` — browse competitions (paginated)
 - `POST /registrations` — register for a competition
 - `GET /admin/stats` — admin dashboard stats (admin only)
+
+## Contributing
+
+Use a branch + Pull Request for each change (don't commit directly to `master`):
+
+```bash
+git checkout -b feature/my-change   # 1. branch off master
+# ...make changes...
+git add -A
+git commit -m "feat: describe the change"
+git push -u origin feature/my-change   # 2. push the branch
+```
+
+Then open a Pull Request (`feature/my-change` → `master`) on GitHub, review the
+diff, and merge. This keeps `master` always working and gives every change a
+reviewable history.
